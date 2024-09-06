@@ -15,6 +15,14 @@ public class MavenCircle {
         this.radius = radius;
     }
 
+    public double getArea() {
+        return Math.PI * Math.pow(radius, 2);
+    }
+
+    public double getLength() {
+        return 2 * Math.PI * radius;
+    }
+
     @Override
     public String toString() {
         return "MavenCircle{radius=" + radius + "}";
