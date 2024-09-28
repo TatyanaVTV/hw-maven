@@ -4,7 +4,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import ru.productstar.servlets.model.Expense;
+import ru.productstar.servlets.model.Transaction;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,10 +14,19 @@ public class DetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var context = req.getServletContext();
 
-        resp.getWriter().println("Expenses: ");
-        for ( Expense e : (List<Expense>)context.getAttribute("expenses")) {
-            resp.getWriter().println(String.format("- %s(%d)", e.getName(), e.getSum()));
+        try {
+            var session = req.getSession(false);
+            if (session == null) {
+                resp.getWriter().println("Not authorized");
+                return;
+            }
+            resp.getWriter().println("Transactions: ");
+            for ( Transaction e : (List<Transaction>) context.getAttribute("transactions")) {
+                resp.getWriter().println(e.getSimpleStringValue());
+            }
+            resp.getWriter().println("\n");
+        } catch (Exception ex) {
+            throw new ServletException(ex);
         }
-        resp.getWriter().println("\n");
     }
 }

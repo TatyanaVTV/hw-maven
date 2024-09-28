@@ -8,6 +8,26 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
+    <error-page>
+        <error-code>404</error-code>
+        <location>/exceptionHandler</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/exceptionHandler</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>jakarta.servlet.ServletException</exception-type>
+        <location>/exceptionHandler</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/exceptionHandler</location>
+    </error-page>
+
     <context-param>
         <param-name>salary</param-name>
         <param-value>100</param-value>

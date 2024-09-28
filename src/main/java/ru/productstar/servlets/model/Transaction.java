@@ -1,10 +1,12 @@
 package ru.productstar.servlets.model;
 
-public class Expense {
+public class Transaction {
+    private final TransactionType type;
     private final String name;
     private final int sum;
 
-    public Expense(String name, int sum) {
+    public Transaction(TransactionType type, String name, int sum) {
+        this.type = type;
         this.name = name;
         this.sum = sum;
     }
@@ -17,9 +19,14 @@ public class Expense {
         return sum;
     }
 
+    public String getSimpleStringValue() {
+        return String.format("%s%d (%s)", type.getSign(), getSum(), getName());
+    }
+
     @Override
     public String toString() {
-        return "Expense{" +
+        return "Transaction{" +
+                "type='" + type.name() + '\'' +
                 "name='" + name + '\'' +
                 ", sum=" + sum +
                 '}';
